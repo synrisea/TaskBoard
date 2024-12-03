@@ -4,35 +4,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Task Manager</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
     <header>
         <h1>Task Manager</h1>
     </header>
     <main>
-        <section class="add-task">
+        <section id="task-form">
             <h2>Add New Task</h2>
             <form>
-                <input type="text" placeholder="Task Title">
-                <textarea placeholder="Task Description"></textarea>
+                <label for="task-title">Title:</label>
+                <input type="text" id="task-title" placeholder="Task Title">
+
+                <label for="task-details">Details:</label>
+                <textarea id="task-details" placeholder="Task Details"></textarea>
+
                 <button type="submit">Add Task</button>
             </form>
         </section>
-        <section class="task-list">
-            <h2>Task List</h2>
+        <section id="task-list">
+            <h2>Tasks</h2>
             <ul>
-                <li>
+                <li class="task">
                     <input type="checkbox">
-                    <span>Task Title 1</span>
-                    <button>Edit</button>
-                    <button>Delete</button>
-                </li>
-                <li>
-                    <input type="checkbox">
-                    <span>Task Title 2</span>
-                    <button>Edit</button>
-                    <button>Delete</button>
+                    <span class="task-title">Example Task</span>
+                    <button class="edit-button">
+                        <a href="edit.html?id=1">Edit</a>
+                    </button>
+                    <button class="delete-button">Delete</button>
+                    <button class="details-button">
+                        <a href="details.html?id=1">View Details</a>
+                    </button>
                 </li>
             </ul>
         </section>
