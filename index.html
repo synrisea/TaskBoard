@@ -5,6 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Task Manager</title>
     <link rel="stylesheet" href="css/main.css">
+    <style>
+        textarea {
+            resize: none;
+            overflow-y: hidden; 
+            min-height: 50px; 
+            padding: 8px;
+            font-size: 14px;
+            line-height: 1.5;
+            width: 100%;
+            box-sizing: border-box;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -19,23 +31,19 @@
 
                 <label for="task-details">Details:</label>
                 <textarea id="task-details" placeholder="Task Details"></textarea>
-
                 <button type="submit">Add Task</button>
             </form>
         </section>
         <section id="task-list">
             <h2>Tasks</h2>
-            <ul>
+            <ul class="task-list">
                 <li class="task">
                     <input type="checkbox">
-                    <span class="task-title">Example Task</span>
+                    <a href="details.html?id=1" class="task-title">Example Task</a>
                     <button class="edit-button">
                         <a href="edit.html?id=1">Edit</a>
                     </button>
                     <button class="delete-button">Delete</button>
-                    <button class="details-button">
-                        <a href="details.html?id=1">View Details</a>
-                    </button>
                 </li>
             </ul>
         </section>
@@ -43,5 +51,8 @@
     <footer>
         <p>&copy; 2024 Task Manager</p>
     </footer>
+
+    <script src="js/main.js"></script>
+
 </body>
 </html>
