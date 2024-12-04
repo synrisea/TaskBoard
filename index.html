@@ -28,31 +28,24 @@
             <form>
                 <label for="task-title">Title:</label>
                 <input type="text" id="task-title" placeholder="Task Title">
-
                 <label for="task-details">Details:</label>
                 <textarea id="task-details" placeholder="Task Details"></textarea>
                 <button type="submit">Add Task</button>
             </form>
+            <label id="status-message" style="display:none; margin-top: 10px;"></label>
         </section>
         <section id="task-list">
             <h2>Tasks</h2>
             <ul class="task-list">
-                <li class="task">
-                    <input type="checkbox">
-                    <a href="details.html?id=1" class="task-title">Example Task</a>
-                    <button class="edit-button">
-                        <a href="edit.html?id=1">Edit</a>
-                    </button>
-                    <button class="delete-button">Delete</button>
-                </li>
+                <!-- Dynamically rendered tasks -->
             </ul>
         </section>
     </main>
     <footer>
         <p>&copy; 2024 Task Manager</p>
     </footer>
-
     <script src="js/main.js"></script>
-
+    <script src="js/taskManager.js"></script>
+    <script src="js/task.js"></script>
 </body>
 </html>

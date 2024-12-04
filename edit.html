@@ -12,14 +12,12 @@
     </header>
     <main>
         <section id="edit-task-form">
-            <h2>Edit Task: <span class="task-title">Example Task</span></h2>
+            <h2>Edit Task: <span class="task-title"></span></h2>
             <form>
                 <label for="edit-task-title">Title:</label>
-                <input type="text" id="edit-task-title" value="Example Task">
-
+                <input type="text" id="edit-task-title">
                 <label for="edit-task-details">Details:</label>
-                <textarea id="edit-task-details">This is an example task description.</textarea>
-
+                <textarea id="edit-task-details"></textarea>
                 <button type="submit">Save Changes</button>
                 <button type="button" onclick="window.location.href='index.html';">Cancel</button>
             </form>
@@ -28,5 +26,8 @@
     <footer>
         <p>&copy; 2024 Task Manager</p>
     </footer>
+    <script src="js/main.js"></script>
+    <script src="js/taskManager.js"></script>
+    <script src="js/task.js"></script>
 </body>
 </html>
