@@ -40,7 +40,11 @@ class Task {
     get isCompleted() {
       return this.#isCompleted;
     }
-  
+
+    destroy() {
+      taskManager.removeTask(this.id);
+    }
+    
     toggleCompleted() {
       this.#isCompleted = !this.#isCompleted;
     }
