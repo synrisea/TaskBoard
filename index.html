@@ -36,15 +36,19 @@
         </section>
         <section id="task-list">
             <h2>Tasks</h2>
+            <label for="sort-tasks">Sort By:</label>
+            <select id="sort-tasks">
+                <option value="createdAt">Date</option>
+                <option value="title">Title</option>
+            </select>
             <ul class="task-list">
-                <!-- Dynamically rendered tasks -->
             </ul>
         </section>
     </main>
     <footer>
         <p>&copy; 2024 Task Manager</p>
     </footer>
-    <script src="js/main.js"></script>
+    <script src="js/main.js" defer></script>
     <script src="js/taskManager.js"></script>
     <script src="js/task.js"></script>
 </body>

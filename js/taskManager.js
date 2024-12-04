@@ -43,11 +43,11 @@ class TaskManager {
   
     sortTasksBy(field) {
       return [...this.#tasks].sort((a, b) =>
-        field === "createdAt"
-          ? new Date(b[field]) - new Date(a[field])
-          : a[field].localeCompare(b[field])
+          field === "createdAt"
+              ? new Date(b.createdAt) - new Date(a.createdAt)
+              : a.title.localeCompare(b.title)
       );
-    }
+  }
   
     saveToLocalStorage() {
       localStorage.setItem("tasks", JSON.stringify(this.#tasks));
