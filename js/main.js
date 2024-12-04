@@ -24,11 +24,20 @@ document.addEventListener("DOMContentLoaded", () => {
     const descriptionRegex = /^[^\s].{1,}$/;
 
     function validateTitle(title) {
-        return titleRegex.test(title);
+        const trimmedTitle = title.trim();
+        const words = trimmedTitle.split(/\s+/);
+        const isValidFormat = words.length >= 2 && trimmedTitle === trimmedTitle.replace(/\s{2,}/g, " ");
+        const areWordsValid = words.every(word => /^[A-Za-zА-Яа-я0-9]{1,16}$/.test(word));
+        const isNotOnlyNumbers = !words.every(word => /^\d+$/.test(word));
+        return isValidFormat && areWordsValid && isNotOnlyNumbers;
     }
 
-    function validateDescription(description) {
-        return descriptionRegex.test(description);
+    function validateDescription(description, title) {
+        return (
+            /^(?!\s)(.{1,})$/.test(description) &&
+            description.trim() !== title.trim() &&
+            description.split(/\s+/).every(word => word.length <= 16)
+        );
     }
     
     function renderTasks() {
