@@ -25,6 +25,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function validateTitle(title) {
         const trimmedTitle = title.trim();
+        if (title !== trimmedTitle) {
+            return false;
+        }
         const words = trimmedTitle.split(/\s+/);
         const isValidFormat = words.length >= 2 && trimmedTitle === trimmedTitle.replace(/\s{2,}/g, " ");
         const areWordsValid = words.every(word => /^[A-Za-zА-Яа-я0-9]{1,16}$/.test(word));
@@ -104,7 +107,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const title = document.getElementById("task-title").value.trim();
             const details = document.getElementById("task-details").value.trim();
 
-            if (!validateTitle(title) || !validateDescription(details)) {
+            if (!validateTitle(title) || !validateDescription(title,details)) {
                 statusMessage.textContent = "Invalid title or description!";
                 statusMessage.style.color = "red";  
                 statusMessage.style.display = "block";
