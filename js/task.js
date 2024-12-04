@@ -6,7 +6,7 @@ class Task {
     #isCompleted;
   
     constructor(title, description) {
-      this.#id = Date.now().toString(36) + Math.random().toString(36).substr(2);
+      this.#id = Date.now().toString();
       this.#title = title;
       this.#description = description;
       this.#createdAt = new Date().toLocaleString("ru-RU");
@@ -44,4 +44,22 @@ class Task {
     toggleCompleted() {
       this.#isCompleted = !this.#isCompleted;
     }
+
+    toJSON() {
+      return {
+          id: this.#id,
+          title: this.#title,
+          description: this.#description,
+          createdAt: this.#createdAt,
+          isCompleted: this.#isCompleted
+      };
   }
+
+  static fromJSON(data) {
+      const task = new Task(data.title, data.description);
+      task.#id = data.id;
+      task.#createdAt = data.createdAt;
+      task.#isCompleted = data.isCompleted;
+      return task;
+  }
+}

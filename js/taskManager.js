@@ -2,12 +2,13 @@ class TaskManager {
     #tasks;
   
     constructor() {
-      this.#tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+      const tasksFromStorage = JSON.parse(localStorage.getItem("tasks")) || [];
+      this.#tasks = tasksFromStorage.map(taskData => Task.fromJSON(taskData));
     }
-  
     addTask(task) {
       this.#tasks.push(task);
       this.saveToLocalStorage();
+      console.log("Adding task:", task);
     }
   
     removeTask(taskId) {
@@ -51,7 +52,7 @@ class TaskManager {
     saveToLocalStorage() {
       localStorage.setItem("tasks", JSON.stringify(this.#tasks));
     }
-  
+    
     get allTasks() {
       return this.#tasks;
     }

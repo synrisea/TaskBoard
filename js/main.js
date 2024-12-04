@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
     const taskManager = new TaskManager();
-
+    console.log(taskManager.allTasks);
     function autoResizeTextarea(area) {
         area.style.height = "auto";
         area.style.height = area.scrollHeight + "px";
@@ -92,6 +92,9 @@ if (addForm) {
         statusMessage.style.color = "green";  
         statusMessage.style.display = "block";
         addForm.reset();
+
+        console.log(localStorage.getItem("tasks"));
+
     });
 }
 
@@ -146,6 +149,7 @@ if (addForm) {
             alert("Task not found!");
         }
     }
-
+    
+    
     renderTasks();
 });
