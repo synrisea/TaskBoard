@@ -4,6 +4,11 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("sort-tasks").addEventListener("change", () => {
         renderTasks();
     });
+    const filterSelect = document.getElementById("filter-tasks");
+    const sortSelect = document.getElementById("sort-tasks");
+    const taskList = document.querySelector("#task-list .task-list");
+    const addForm = document.querySelector("#task-form form");
+    const statusMessage = document.getElementById("status-message"); 
 
     function autoResizeTextarea(area) {
         area.style.height = "auto";
@@ -34,12 +39,14 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
         
-        const sortBy = document.getElementById("sort-tasks").value; // Get the selected sort option
-        const sortedTasks = taskManager.sortTasksBy(sortBy); // Sort tasks based on selected option
+        const filterBy = filterSelect.value;
+        const sortBy = sortSelect.value;    
+
+        const tasksToRender = taskManager.getFilteredAndSortedTasks(filterBy, sortBy);
     
         taskList.innerHTML = ""; 
         
-        sortedTasks.forEach(task => {
+        tasksToRender.forEach(task => {
             const taskItem = document.createElement("li");
             taskItem.classList.add("task");
     
@@ -74,15 +81,13 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
     
-    
+    filterSelect.addEventListener("change", renderTasks);
+    sortSelect.addEventListener("change", renderTasks);
     
     function deleteTask(taskId) {
         taskManager.removeTask(taskId);
         renderTasks();
     }
-
-    const addForm = document.querySelector("#task-form form");
-    const statusMessage = document.getElementById("status-message"); 
 
     if (addForm) {
         addForm.addEventListener("submit", event => {

@@ -36,12 +36,18 @@
         </section>
         <section id="task-list">
             <h2>Tasks</h2>
+            <label for="filter-tasks">Filter:</label>
+            <select id="filter-tasks">
+                <option value="all">All</option>
+                <option value="completed">Completed</option>
+                <option value="incomplete">Incomplete</option>
+            </select>
             <label for="sort-tasks">Sort By:</label>
             <select id="sort-tasks">
-                <option value="createdAt">Date</option>
-                <option value="title">Title</option>
+                <option value="createdAt">Date (Newest First)</option>
+                <option value="title">Title (A-Z)</option>
             </select>
-            <ul class="task-list">
+            <ul id="task-container" class="task-list">
             </ul>
         </section>
     </main>

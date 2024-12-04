@@ -37,16 +37,22 @@ class TaskManager {
       return this.#tasks.find(task => task.id === taskId);
     }
   
-    filterTasksByStatus(isCompleted) {
-      return this.#tasks.filter(task => task.isCompleted === isCompleted);
-    }
-  
-    sortTasksBy(field) {
-      return [...this.#tasks].sort((a, b) =>
-          field === "createdAt"
-              ? new Date(b.createdAt) - new Date(a.createdAt)
-              : a.title.localeCompare(b.title)
-      );
+    getFilteredAndSortedTasks(filterBy, sortBy) {
+      let filteredTasks = [...this.#tasks];
+
+      if (filterBy === "completed") {
+          filteredTasks = filteredTasks.filter(task => task.isCompleted);
+      } else if (filterBy === "incomplete") {
+          filteredTasks = filteredTasks.filter(task => !task.isCompleted);
+      }
+
+      if (sortBy === "createdAt") {
+          filteredTasks.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+      } else if (sortBy === "title") {
+          filteredTasks.sort((a, b) => a.title.localeCompare(b.title));
+      }
+
+      return filteredTasks;
   }
   
     saveToLocalStorage() {
