@@ -21,25 +21,55 @@ document.addEventListener("DOMContentLoaded", () => {
     function validateDescription(description) {
         return descriptionRegex.test(description);
     }
-
+    
     function renderTasks() {
         const taskList = document.querySelector(".task-list");
         taskList.innerHTML = ""; 
+    
         taskManager.allTasks.forEach(task => {
             const taskItem = document.createElement("li");
             taskItem.classList.add("task");
-            taskItem.innerHTML = `
-                <input type="checkbox" ${task.isCompleted ? "checked" : ""} onclick="toggleTaskStatus('${task.id}')">
-                <a href="details.html?id=${task.id}" class="task-title">${task.title}</a>
-                <button class="edit-button"><a href="edit.html?id=${task.id}">Edit</a></button>
-                <button class="delete-button" onclick="deleteTask('${task.id}')">Delete</button>
-            `;
+    
+            const checkbox = document.createElement("input");
+            checkbox.type = "checkbox";
+            checkbox.checked = task.isCompleted;
+            checkbox.addEventListener("click", () => toggleTaskStatus(task.id));
+    
+            const taskTitle = document.createElement("a");
+            taskTitle.href = `details.html?id=${task.id}`;
+            taskTitle.classList.add("task-title");
+            taskTitle.textContent = task.title;
+    
+            const editButton = document.createElement("button");
+            editButton.classList.add("edit-button");
+            const editLink = document.createElement("a");
+            editLink.href = `edit.html?id=${task.id}`;
+            editLink.textContent = "Edit";
+            editButton.appendChild(editLink);
+    
+            const deleteButton = document.createElement("button");
+            deleteButton.classList.add("delete-button");
+            deleteButton.textContent = "Delete";
+            deleteButton.addEventListener("click", () => deleteTask(task.id));
+    
+            taskItem.appendChild(checkbox);
+            taskItem.appendChild(taskTitle);
+            taskItem.appendChild(editButton);
+            taskItem.appendChild(deleteButton);
+    
             taskList.appendChild(taskItem);
         });
     }
+    
+    
+    function deleteTask(taskId) {
+        taskManager.removeTask(taskId);
+        
+        renderTasks();
+    }
 
     const addForm = document.querySelector("#task-form form");
-const statusMessage = document.getElementById("status-message"); 
+    const statusMessage = document.getElementById("status-message"); 
 
 if (addForm) {
     addForm.addEventListener("submit", event => {
