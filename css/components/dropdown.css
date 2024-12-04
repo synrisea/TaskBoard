@@ -1,0 +1,52 @@
+select {
+    margin:10px;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-color: #f4f4f4;
+    color: #333;
+    padding: 8px 12px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+    outline: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+}
+
+select:hover {
+    border-color: #999;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transform: scale(1.02);
+}
+
+select:focus {
+    border-color: #4CAF50;
+    box-shadow: 0 0 6px rgba(76, 175, 80, 0.5);
+    transform: scale(1.03);
+}
+
+select::-ms-expand {
+    display: none;
+}
+
+#sort-tasks {
+    position: relative;
+}
+
+#sort-tasks::after {
+    content: "▼";
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    pointer-events: none;
+    font-size: 10px;
+    color: #666;
+    transition: transform 0.3s ease;
+}
+
+select:hover + #sort-tasks::after,
+select:focus + #sort-tasks::after {
+    transform: translateY(-50%) rotate(180deg);
+}
