@@ -1,14 +1,13 @@
 document.addEventListener("DOMContentLoaded", () => {
     const taskManager = new TaskManager();
 
-    document.getElementById("sort-tasks").addEventListener("change", () => {
-        renderTasks();
-    });
     const filterSelect = document.getElementById("filter-tasks");
     const sortSelect = document.getElementById("sort-tasks");
     const taskList = document.querySelector("#task-list .task-list");
     const addForm = document.querySelector("#task-form form");
     const statusMessage = document.getElementById("status-message"); 
+    
+    
 
     function autoResizeTextarea(area) {
         area.style.height = "auto";
@@ -36,6 +35,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function validateDescription(description, title) {
+        if (typeof description !== 'string' || description.trim() === "") {
+            return false;
+        }
         return (
             /^(?!\s)(.{1,})$/.test(description) &&
             description.trim() !== title.trim() &&
@@ -43,9 +45,8 @@ document.addEventListener("DOMContentLoaded", () => {
         );
     }
     
-    function renderTasks() {
-        const taskList = document.querySelector("#task-list .task-list");
-        
+    
+    function renderTasks() {        
         if (!taskList) {
             console.error("task-list element not found. Make sure the HTML contains a <ul class='task-list'> element.");
             return;
@@ -93,8 +94,12 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
     
-    filterSelect.addEventListener("change", renderTasks);
-    sortSelect.addEventListener("change", renderTasks);
+    if (filterSelect) {
+        filterSelect.addEventListener("change", renderTasks);
+    }
+    if (sortSelect) {
+        sortSelect.addEventListener("change", renderTasks);
+    }
     
     function deleteTask(taskId) {
         taskManager.removeTask(taskId);
@@ -107,7 +112,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const title = document.getElementById("task-title").value.trim();
             const details = document.getElementById("task-details").value.trim();
 
-            if (!validateTitle(title) || !validateDescription(title,details)) {
+            if (!validateTitle(title) || !validateDescription(details, title)) {
                 statusMessage.textContent = "Invalid title or description!";
                 statusMessage.style.color = "red";  
                 statusMessage.style.display = "block";
@@ -145,7 +150,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (!task) {
             //show404Page();
-        } else {
+        } 
+        else {
             document.getElementById("edit-task-title").value = task.title;
             document.getElementById("edit-task-details").value = task.description;
 
@@ -154,14 +160,14 @@ document.addEventListener("DOMContentLoaded", () => {
                 const title = document.getElementById("edit-task-title").value.trim();
                 const details = document.getElementById("edit-task-details").value.trim();
 
-                if (!validateTitle(title) || !validateDescription(details)) {
+                if (!validateTitle(title) || !validateDescription(title,details)) {
                     alert("Invalid title or description!");
                     return;
                 }
 
                 taskManager.editTask(task.id, title, details);
-                window.location.href = "index.html";
-            });
+                window.location.href = "index.html";  
+            });    
         }
     }
 
@@ -181,6 +187,11 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
+    if (sortSelect) {
+        sortSelect.addEventListener("change", () => {
+            renderTasks();
+        });
+    }
     function show404Page() {
         document.body.innerHTML = `
             <div style="text-align: center; padding: 50px;">
